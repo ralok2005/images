@@ -1,10 +1,43 @@
 <!doctype html>
-<html data-n-head-ssr>
+<html class="no-js" lang="en-US">
 <head>
-<title>cdn02</title>
-<meta data-n-head="ssr" charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Time cdn1</title>
+<meta name="description" content="We source and review the best products from China" />
+<style type="text/css">@import url("https://fonts.googleapis.com/css?family=Share+Tech+Mono");body,html{height:95%}body{background:#0f3854;background:radial-gradient(ellipse at center,#0a2e38 0,#000 70%);background-size:100%}p{margin:0;padding:0}#clock{font-family:Share Tech Mono,monospace;color:#fff;text-align:center;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#daf6ff;text-shadow:0 0 20px #0aafe6,0 0 20px rgba(10,175,230,0)}#clock .time{letter-spacing:.05em;font-size:80px;padding:5px 0}#clock .date{letter-spacing:.1em;font-size:24px}#clock .text{letter-spacing:.1em;font-size:14px;padding:20px 0 0}</style>
+<style type="text/css">.box{width:60%;margin:0 auto}.zz{width:100%;overflow:hidden;float:left;margin-top:20px}.zz .zz_span{height:100%;cursor:pointer;margin-bottom:3px;padding-right:3px}.zz .zz_span,.zz .zz_span img{width:100%;position:relative;float:left}.zz .zz_span img{height:100%;z-index:1}.zz .zz_span span{position:absolute;z-index:2;right:4px;bottom:0;background:rgba(0,0,0,.4);font-size:12px;color:#fff;padding:2px 4px}.zz .zz_span:last-child{margin-bottom:0}.zz .zz_span:nth-child(2n){float:right}.zz .zz_span.zz_span_50{width:50%}.zz_footer .zz_span{background:#fff}</style>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
-cdn2
+<div id="clock">
+    <p class="date">{{ date }}</p>
+    <p class="time">{{ time }}</p>
+    <p class="text"><iframe allowtransparency="true" frameborder="0" width="317" height="28" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=3&z=1&t=1&v=0&d=1&bd=0&k=&f=ffffff&ltf=009944&htf=cc0000&q=1&e=0&a=1&c=54511&w=317&h=38&align=center"></iframe>
+</div>
+<script>
+var clock = new Vue({
+    el: '#clock',
+    data: {
+        time: '',
+        date: ''
+    }
+});
+var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+var timerID = setInterval(updateTime, 1000);
+updateTime();
+function updateTime() {
+    var cd = new Date();
+    clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+    clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+};
+function zeroPadding(num, digit) {
+    var zero = '';
+    for(var i = 0; i < digit; i++) {
+        zero += '0';
+    }
+    return (zero + num).slice(-digit);
+}
+</script>
 </body>
 </html>
